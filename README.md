@@ -130,3 +130,19 @@ python3 02_make_table.py
 mkdir plot
 Rscript 03_make_barplot.R 
 ```
+
+
+### Automatic classification for RQ2
+In RQ2, we manually classify micro commits into corresponding targets and operations.
+However, this process complicates the conduct of future studies.
+An approach to automatically classify targets and operations would be beneficial for future studies.
+Hence, we implemented a rule-based approach to validate the automatic classification.
+Unfortunately, achieving high performance can be challenging. 
+For future studies, we have included this rule-based approach in the replication package.
+
+
+```
+python3 01_rule.py
+```
+
+Due to licensing restrictions, we have not attached the database. If you wish to execute the script, please contact us.
