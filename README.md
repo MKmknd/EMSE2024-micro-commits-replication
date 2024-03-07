@@ -34,13 +34,13 @@ So, we
 
 ```
 cd ./prepare_dataset
-bash clone.sh # 1 
+bash clone.sh
 ```
 
 After this process, please apply [cregit](https://github.com/cregit/cregit) to these repositories.
 Finally, please commit the finall diff with a commit message 'cregit' (otherwise, you have to update some scripts that ignore the latest commit)
 Then, you will get ``token repositories''. 
-Please copy them into ``cregit_repository''
+Please copy them into ``cregit_repository'' (this directory will be made by clone.sh)
 
 ```
 git config --global --add safe.directory '*'
@@ -61,46 +61,62 @@ So, you have the following directories:
 
 
 ### Motivating Example
-Second, we computed the number of One-line commits and showed Table 1 in Section 2 (Motivating Example). 
-
+Second, we computed the number of studied commits and one-line commits that are used in Table 1 in Section 2 (Motivating Example). 
 
 ```
 cd ./../motivating_example
 bash 01_oneline_commits.sh # output the data of Table 1
 ```
 
+### Data collection
+Third, we presented the basic statistics of micro commits and one-line commits, as depicted in Table 2 and Table 3.
 
-### RQs
+```
+cd ./../data_collection
+python3 01_intersection.py
+python3 02_make_table.py
+```
 
-Third, we conducted the experiments of RQ. 
+### RQs and discussion
+fourth, we conducted the experiments of RQs and discussion. 
 
 
 RQ1
 
 ```
 cd ./../rq1
-bash 01_heatmap.sh # prepare the Figures 2, 3, and 4 data, and show the proportion of commits add-or-remove at most one token, three tokens, and five tokens (./data/maxtokenadded.csv)
-Rscript 01_heatmap.R # create Figures 2, 3, and 4
-bash 02_statistics.sh # show the statistics in the text in RQ1
-python3 03_make_table.py # prepare Table 2 ('./tables/onetoken_commit_prop.csv')
+bash 01_1_extract_micro_commits.sh 
+python3 02_1_extract_changed_tokens.py 
+bash 03_1_analyze.sh 
+Rscript 03_2_analyze.R 
+python3 04_1_make_data.py 
+Rscript 05_1_analyze.R 
 ```
 
 RQ2
 
 ```
 cd ./../rq2
-bash 01_1_extract_micro_commits.sh # prepare a new database data
-python3 02_1_extract_changed_tokens.py # make a new database
-bash 03_1_analyze.sh # prepare a data to make the figures
-Rscript 03_2_analyze.R # Figure 6
-python3 04_1_make_data.py # Table 3
-Rscript 05_1_analyze.R # Figure 5
+bash 01_num_single_multi_micro_commits.sh 
+python3 02_make_table.py 
+python3 03_multi_activity.py 
 ```
 
 RQ3
 
 ```
 cd ./../rq3
+bash 01_heatmap.sh 
+Rscript 01_heatmap.R 
+bash 02_statistics.sh 
+bash 03_check_value.sh
+bash 04_01_extract_num_hunks.sh
+Rscript 04_02_make_plot.R
+```
+
+Discussion
+
+```
 # before executing the following script, 
 # you should get the data for nltk
 # i.e., in Python
@@ -109,11 +125,8 @@ cd ./../rq3
 # nltk.download('punkt')
 python3 01_1_prepare_data.py
 python3 01_2_maintenance_commit.py
-bash 01_show_data.sh # show the data of Figure 7
-python3 02_make_table.py # prepare the data of Figure 7
+bash 01_show_data.sh 
+python3 02_make_table.py 
 mkdir plot
-Rscript 03_make_barplot.R # make Figure 7
-bash 04_num_single_multi_micro_commits.sh # Table 6
-python3 05_make_table.py # Table 7
-python3 06_multi_activity.py # Table 8 and 9
+Rscript 03_make_barplot.R 
 ```
