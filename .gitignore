@@ -1,0 +1,23 @@
+
+# env files
+.DS_Store
+*.swp
+*.pyc
+__pycache__
+.venv/
+.vscode
+.micro
+
+# data
+.db
+*.zip
+*.csv
+
+repository/*
+repository_cregit/*
+tmp
+tmp*
+
+# my files
+_masa_*
+
