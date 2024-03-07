@@ -3,8 +3,6 @@
 library(ggplot2)
 library(reshape2)
 
-data_path = "/home/work_dir"
-
 show_hunks_linerepo = function(num_hunks){
 
   p = ggplot(num_hunks, aes(x=hunkslines, color=project), environment = environment())
@@ -65,7 +63,7 @@ show_hunks_tokenrepo = function(num_hunks){
 }
 
 
-num_hunks = read.csv(paste0(data_path, "/exp47/03_rq2_for_rq1/data/num_hunks.csv"), header=FALSE)
+num_hunks = read.csv(paste0("./data/num_hunks.csv"), header=FALSE)
 names(num_hunks) = c('project','linecid','tokencid','hunkslines','hunkstokens')
 show_hunks_linerepo(num_hunks)
 show_hunks_tokenrepo(num_hunks)

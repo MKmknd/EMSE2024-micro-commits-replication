@@ -1,6 +1,6 @@
 
 # write the database path
-base_db='./../prepare_dataset/db/all.db'
+db='./../prepare_dataset/db/all.db'
 
 # add or remove at most one token
 # label exactly_one_token_in_one_line_commits
